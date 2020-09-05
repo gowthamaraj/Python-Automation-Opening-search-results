@@ -14,7 +14,7 @@ if len(sys.argv) > 1:
     keyword = ' '.join(sys.argv[1:])
 else:
     keyword = clipboard.paste()
-    
+
 query = url + keyword
 res = requests.get(query, headers= headers)
 
@@ -22,5 +22,5 @@ parsed = bs4.BeautifulSoup(res.text, 'html.parser')
 g_link = parsed.select('.r a')
 links_filtered = [link.get('href') for link in g_link if '#' not in str(link) if 'webcache' not in str(link)]
 
-for link in links_filtered[:5]:
+for link in links_filtered:
     webbrowser.open_new_tab(link)
